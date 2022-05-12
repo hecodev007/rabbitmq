@@ -1,8 +1,8 @@
 package rabbitmq
 
 import (
-	"ethsync/common/log"
 	"fmt"
+	"log"
 )
 
 //type AddrInfo struct {
@@ -56,6 +56,6 @@ func (mq *RabbitMq) Consume(queueName string, receiveFun ReceiveFun) {
 	mq.Pool.RegisterConsumeReceive(nomrl)
 	err := mq.Pool.RunConsume()
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 	}
 }

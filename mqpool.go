@@ -397,7 +397,7 @@ func (r *RabbitPool) initChannels(conn *rConn, exChangeName string, exChangeType
 //rConnect 原rabbitmq连接
 func rConnect(r *RabbitPool, islock bool) (*amqp.Connection, error) {
 	connectionUrl := fmt.Sprintf("%s://%s:%s@%s", r.prefix, r.user, r.password, r.host)
-	fmt.Println("connectionUrl:",connectionUrl)
+	//fmt.Println("connectionUrl:",connectionUrl)
 	client, err := amqp.Dial(connectionUrl)
 	if err != nil {
 		return nil, err

@@ -21,13 +21,23 @@ func NewRabbitMq(hostPort, username, password string) *RabbitMq {
 		fmt.Println(err)
 		return nil
 	}
+
+	instanceProductPool := NewProductPool()
+	//instanceConsumePool.SetMaxConsumeChannel(100)
+	err = instanceProductPool.Connect("amqps", hostPort, username, password)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
 	return &RabbitMq{
-		Pool: instanceConsumePool,
+		Pool:    instanceConsumePool,
+		Product: instanceProductPool,
 	}
 }
 
 type RabbitMq struct {
-	Pool *RabbitPool
+	Pool    *RabbitPool
+	Product *RabbitPool
 }
 
 func (mq *RabbitMq) Consume(queueName string, receiveFun ReceiveFun) {

@@ -12,11 +12,11 @@ import (
 
 type ReceiveFun func(data []byte, header map[string]interface{}, retryClient RetryClientInterface) bool
 
-func NewRabbitMq(hostPort, username, password string) *RabbitMq {
+func NewRabbitMq(hostPort, username, password,prefix string) *RabbitMq {
 
 	instanceConsumePool := NewConsumePool()
 	//instanceConsumePool.SetMaxConsumeChannel(100)
-	err := instanceConsumePool.Connect("amqps", hostPort, username, password)
+	err := instanceConsumePool.Connect(prefix, hostPort, username, password)
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -24,7 +24,7 @@ func NewRabbitMq(hostPort, username, password string) *RabbitMq {
 
 	instanceProductPool := NewProductPool()
 	//instanceConsumePool.SetMaxConsumeChannel(100)
-	err = instanceProductPool.Connect("amqps", hostPort, username, password)
+	err = instanceProductPool.Connect(prefix, hostPort, username, password)
 	if err != nil {
 		fmt.Println(err)
 		return nil
